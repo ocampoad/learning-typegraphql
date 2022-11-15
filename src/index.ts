@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginLandingPageGraphQLPlayground, ApolloServerPluginLandingPageProductionDefault } from "apollo-server-core";
 import {resolvers} from "./resolvers"
+import connnectToMongo from "./utils/mongo"
 
 async function bootstrap(){
     //Build schema
@@ -43,6 +44,7 @@ server.applyMiddleware({app})
         console.log("App is listening on http://localhost:4000")
     });
     //connect to db
+    connnectToMongo();
 }
 
-bootstrap
+bootstrap()
