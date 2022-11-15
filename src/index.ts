@@ -47,4 +47,4 @@ server.applyMiddleware({app})
     connnectToMongo();
 }
 
-bootstrap()
+bootstrap();
