@@ -17,7 +17,7 @@ export default class UserResolver {
 
     @Mutation(() => String)
     login(@Arg('input') input: LoginInput, @Ctx() context: Context){
-        return this.userService.login(input);
+        return this.userService.login(input, context);
     }
 
     @Query(() => User)
