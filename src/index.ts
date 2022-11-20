@@ -7,7 +7,10 @@ import cookieParser from "cookie-parser";
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginLandingPageGraphQLPlayground, ApolloServerPluginLandingPageProductionDefault } from "apollo-server-core";
 import {resolvers} from "./resolvers"
+import { User } from "./schema/user.schema"
+import Context from "./types/context"
 import connnectToMongo from "./utils/mongo"
+import { verifyJwt } from "./utils/jwt";
 
 async function bootstrap(){
     //Build schema
@@ -23,7 +26,14 @@ app.use(cookieParser())
     // Create apollo server
 const server = new ApolloServer({
     schema,
-    context: (ctx) => {
+    context: (ctx: Context) => {
+        const context = ctx
+
+        if(ctx.req.cookies.accessToken) {
+            const user = verifyJwt<User>(ctx.req.cookies.accessToken)
+            
+            ctx.user = user
+        }
         console.log(ctx)
         return ctx
     },

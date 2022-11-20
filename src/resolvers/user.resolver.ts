@@ -3,6 +3,7 @@ import UserService from "../../service/user.service";
 import { User, CreateUserInput, LoginInput } from "../schema/user.schema";
 import Context from "../types/context";
 
+
 @Resolver()
 export default class UserResolver {
 
@@ -21,11 +22,7 @@ export default class UserResolver {
     }
 
     @Query(() => User)
-    me(){
-        return {
-            _id: "123",
-            name: "Jane Doe",
-            email: "Jane Doe Email"
-        }
+    me(@Ctx() context: Context){
+        return context.user;
     }
 }
