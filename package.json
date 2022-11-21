@@ -27,8 +27,8 @@
     "dotenv": "^16.0.3",
     "graphql": "15.x",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.2",
-    "nanoid": "^4.0.0",
+    "mongoose": "^6.6.0",
+    "nanoid": "^3.1.30",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1"
   },
