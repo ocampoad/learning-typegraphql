@@ -11,12 +11,13 @@ import { User } from "./schema/user.schema"
 import Context from "./types/context"
 import connnectToMongo from "./utils/mongo"
 import { verifyJwt } from "./utils/jwt";
+import authChecker from './utils/authChecker'
 
 async function bootstrap(){
     //Build schema
 const schema = await buildSchema({
     resolvers,
-    //authChecker
+    authChecker
 })
     //Init express
 const app = express()
@@ -32,7 +33,7 @@ const server = new ApolloServer({
         if(ctx.req.cookies.accessToken) {
             const user = verifyJwt<User>(ctx.req.cookies.accessToken)
             
-            ctx.user = user
+            context.user = user
         }
         console.log(ctx)
         return ctx
